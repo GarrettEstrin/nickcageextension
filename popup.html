@@ -1,0 +1,36 @@
+<!-- Custom HTML by Garrett Estrin | GarrettEstrin.com -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div style="max-width: 200px;
+      max-height: 600px;">
+      <img  id="pic" src="" alt="">
+    </div>
+    <script type="text/javascript">
+      let imgSrc = document.getElementById('pic')
+      let apiKey = 'http://api.giphy.com/v1/gifs/search?q=nicholas+cage&api_key=dc6zaTOxFJmzC'
+      var arr = {}
+
+      function loadPic() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+          //  console.log(this.responseText)
+           obj = JSON.parse(this.responseText)
+           arr = obj.data
+           imgSrc.src =  arr[Math.floor( Math.random() * 25 )].images.original.url
+          }
+        };
+        xhttp.open("GET", apiKey, true);
+        xhttp.send();
+      }
+
+      loadPic()
+
+    </script>
+  </body>
+</html>
